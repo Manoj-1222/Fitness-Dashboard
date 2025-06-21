@@ -45,7 +45,7 @@ npm start     # For Create React App
 ```
 
 ### 4. Open in Browser
-Visit [http://localhost:5173](http://localhost:5173) (Vite) or [http://localhost:3000](http://localhost:3000) (CRA).
+Visit [https://fitness-board.netlify.app/](https://fitness-board.netlify.app/)
 
 ## Project Structure
 
