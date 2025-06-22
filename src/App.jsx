@@ -24,11 +24,11 @@ function getInitialLogs() {
 export default function App() {
   const [darkMode, setDarkMode] = useState(false);
   const [view, setView] = useState('daily');
-  const [logs] = useState(getInitialLogs());
+  const [activityLogs] = useState(getInitialLogs());
 
   useEffect(() => {
-    localStorage.setItem('activityLogs', JSON.stringify(logs));
-  }, [logs]);
+    localStorage.setItem('activityLogs', JSON.stringify(activityLogs));
+  }, [activityLogs]);
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', darkMode ? 'dark' : 'light');
@@ -50,39 +50,85 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Container maxWidth="xl" sx={{ mt: 2, mb: 2 }}>
-        <Header darkMode={darkMode} onToggleTheme={() => setDarkMode(m => !m)} />
+        <Grid container direction="column" spacing={2}>
+          {/* Header */}
+          <Grid item>
+            <Header darkMode={darkMode} onToggleTheme={() => setDarkMode(m => !m)} />
+          </Grid>
 
-        <Grid container spacing={2} alignItems="stretch" sx={{ mt: 2 }}>
-          <Grid item xs={12} md={8}>
-            <Grid container spacing={2}>
-              <Grid item xs={3}><StatsCard title="Steps Today" value={dummyData.stats.steps} unit="steps" icon={<DirectionsWalkIcon sx={{ fontSize: { xs: 28, md: 40 } }} />} color="#42A5F5" /></Grid>
-              <Grid item xs={3}><StatsCard title="Calories Burned" value={dummyData.stats.calories} unit="Kcal" icon={<FitnessCenterIcon sx={{ fontSize: { xs: 28, md: 40 } }} />} color="#FF7043" /></Grid>
-              <Grid item xs={3}><StatsCard title="Heart Rate" value={dummyData.stats.heartRate} unit="bpm" icon={<FavoriteIcon sx={{ fontSize: { xs: 28, md: 40 } }} />} color="#FFC107" /></Grid>
-              <Grid item xs={3}><StatsCard title="Active Minutes" value={dummyData.stats.activeMinutes} unit="min" icon={<AccessTimeIcon sx={{ fontSize: { xs: 28, md: 40 } }} />} color="#4CAF50" /></Grid>
+          {/* Top Section: Stats + Activity Log + Calories Chart */}
+          <Grid item>
+            <Grid container spacing={2} alignItems="flex-start">
+              {/* Stats Cards */}
+              <Grid item xs={12} md={8}>
+                <Grid container spacing={2} alignItems="flex-start">
+                  <Grid item xs={12} sm={6} md={3}>
+                    <StatsCard title="Steps Today" value={dummyData.stats.steps} unit="steps" icon={<DirectionsWalkIcon />} color="#42A5F5" />
+                  </Grid>
+                  <Grid item xs={12} sm={6} md={3}>
+                    <StatsCard title="Calories Burned" value={dummyData.stats.calories} unit="Kcal" icon={<FitnessCenterIcon />} color="#FF7043" />
+                  </Grid>
+                  <Grid item xs={12} sm={6} md={3}>
+                    <StatsCard title="Heart Rate" value={dummyData.stats.heartRate} unit="bpm" icon={<FavoriteIcon />} color="#FFC107" />
+                  </Grid>
+                  <Grid item xs={12} sm={6} md={3}>
+                    <StatsCard title="Active Minutes" value={dummyData.stats.activeMinutes} unit="min" icon={<AccessTimeIcon />} color="#4CAF50" />
+                  </Grid>
+                </Grid>
+              </Grid>
+
+              {/* Activity Log and Calories Burned (Right side stack) */}
+              <Grid item xs={12} md={4}>
+                <Grid container direction="column" spacing={2} alignItems="stretch">
+                  <Grid item>
+                    <ActivityLogTable logs={activityLogs} />
+                  </Grid>
+                  
+                </Grid>
+              </Grid>
             </Grid>
           </Grid>
-          <Grid item xs={12} md={4}>
-            <ActivityLogTable logs={logs} />
-          </Grid>
-        </Grid>
 
-        <Grid container spacing={2} alignItems="flex-start" sx={{ mt: 2 }}>
-          <Grid item xs={12} md={3}>
-            <GoalsPanel goals={dummyData.goals} stats={dummyData.stats} />
-          </Grid>
-          <Grid item xs={12} md={5}>
-            <WorkoutTypePieChart data={dummyData.workoutTypes} />
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <Box>
-              <ToggleViewButtons view={view} onChange={setView} />
-              <ActivityChart data={dummyData.chartData[view]} view={view} />
-              <CaloriesBurnedChart data={dummyData.caloriesBurned.weekly} />
-            </Box>
+          {/* Bottom Section with paddingBottom fix */}
+          <Grid item>
+            <Grid
+              container
+              spacing={2}
+              sx={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                justifyContent: 'flex-start',
+                paddingBottom: '0px'  // ✅ padding-bottom fix applied here
+              }}
+            >
+              {/* Goals */}
+              <Grid item sx={{ width: 'fit-content' }}>
+                <GoalsPanel goals={dummyData.goals} stats={dummyData.stats} />
+              </Grid>
+
+              {/* Pie Chart */}
+              <Grid item sx={{ width: 'fit-content' }}>
+                <WorkoutTypePieChart data={dummyData.workoutTypes} />
+              </Grid>
+
+              {/* Toggle and Activity Chart */}
+              <Grid item sx={{ width: 'fit-content' }}>
+                <Box sx={{ mb: 2 }}>
+                  <ToggleViewButtons view={view} onChange={setView} />
+                </Box>
+                <Box>
+                  <ActivityChart data={dummyData.chartData[view]} view={view} />
+                </Box>
+                
+              </Grid>
+              <Grid item>
+                    <CaloriesBurnedChart data={dummyData.caloriesBurned.weekly} />
+                  </Grid>
+            </Grid>
           </Grid>
         </Grid>
       </Container>
       <Footer />
     </ThemeProvider>
   );
-} 
+}

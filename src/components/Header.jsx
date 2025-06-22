@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
-import { useTheme } from '@mui/material';
+import { useTheme, Box } from '@mui/material';
 
 export default function Header({ darkMode, onToggleTheme }) {
   const theme = useTheme();
@@ -19,9 +19,12 @@ export default function Header({ darkMode, onToggleTheme }) {
       borderRadius: '10px',
     }}>
       <Toolbar>
-        <Typography variant="h5" fontWeight="bold" sx={{ flexGrow: 1, letterSpacing: 1, color: isDark ? '#fff' : '#222' }}>
-          Fitness Tracker Dashboard
-        </Typography>
+        <Box sx={{ display: 'flex', alignItems: 'center', flexGrow: 1 }}>
+          <img src="/logo.png" alt="logo" style={{ width: 40, height: 40, marginRight: '15px' }} />
+          <Typography variant="h5" fontWeight="bold" sx={{ letterSpacing: 1, color: isDark ? '#fff' : '#222' }}>
+            Fitness Tracker Dashboard
+          </Typography>
+        </Box>
         <IconButton color="inherit" onClick={onToggleTheme}>
           {darkMode ? <Brightness7Icon /> : <Brightness4Icon />}
         </IconButton>

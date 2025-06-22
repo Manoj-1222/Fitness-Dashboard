@@ -1,11 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Box, Typography, useTheme, Button, Divider } from '@mui/material';
 
 export default function ActivityLogTable({ logs }) {
   const theme = useTheme();
   const isDark = theme.palette.mode === 'dark';
-  const [showAll, setShowAll] = useState(false);
-  const rowsToShow = showAll ? logs.length : 7;
 
   return (
     <Box sx={{ width: '100%', minWidth: 0 }}>
@@ -21,7 +19,7 @@ export default function ActivityLogTable({ logs }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {logs.slice(0, rowsToShow).map((row, idx) => (
+            {logs.map((row, idx) => (
               <TableRow key={idx}>
                 <TableCell sx={{ color: isDark ? '#fff' : '#222', background: isDark ? '#23233a' : '#fff' }}>{row.date}</TableCell>
                 <TableCell sx={{ color: isDark ? '#fff' : '#222', background: isDark ? '#23233a' : '#fff' }}>{row.type}</TableCell>
@@ -32,16 +30,6 @@ export default function ActivityLogTable({ logs }) {
           </TableBody>
         </Table>
       </TableContainer>
-      {logs.length > 7 && (
-        <>
-          <Divider sx={{ my: 2 }} />
-          <Box display="flex" justifyContent="center">
-            <Button variant="outlined" color="primary" onClick={() => setShowAll(v => !v)}>
-              {showAll ? 'Show Less' : 'Show More'}
-            </Button>
-          </Box>
-        </>
-      )}
     </Box>
   );
 } 
