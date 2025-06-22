@@ -98,7 +98,7 @@ export default function App() {
                 display: 'flex',
                 flexWrap: 'wrap',
                 justifyContent: 'flex-start',
-                paddingBottom: '0px'  // ✅ padding-bottom fix applied here
+                paddingBottom: '0px'  //  padding-bottom fix  here
               }}
             >
               {/* Goals */}
