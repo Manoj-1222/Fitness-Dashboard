@@ -14,17 +14,6 @@
     { "date": "2025-06-17", "type": "Running", "duration": "30 mins", "calories": 300 },
     { "date": "2025-06-18", "type": "Yoga", "duration": "45 mins", "calories": 200 },
     { "date": "2025-06-19", "type": "Cycling", "duration": "60 mins", "calories": 400 },
-    { "date": "2025-06-20", "type": "Strength", "duration": "40 mins", "calories": 350 },
-    { "date": "2025-06-21", "type": "Swimming", "duration": "50 mins", "calories": 420 },
-    { "date": "2025-06-22", "type": "Walking", "duration": "35 mins", "calories": 180 },
-    { "date": "2025-06-23", "type": "HIIT", "duration": "25 mins", "calories": 320 },
-    { "date": "2025-06-24", "type": "Pilates", "duration": "55 mins", "calories": 210 },
-    { "date": "2025-06-25", "type": "Running", "duration": "30 mins", "calories": 310 },
-    { "date": "2025-06-26", "type": "Yoga", "duration": "60 mins", "calories": 250 },
-    { "date": "2025-06-27", "type": "Cycling", "duration": "45 mins", "calories": 370 },
-    { "date": "2025-06-28", "type": "Strength", "duration": "50 mins", "calories": 390 },
-    { "date": "2025-06-29", "type": "Swimming", "duration": "40 mins", "calories": 410 },
-    { "date": "2025-06-30", "type": "Walking", "duration": "30 mins", "calories": 160 },
     { "date": "2025-07-01", "type": "HIIT", "duration": "35 mins", "calories": 330 }
   ],
   "chartData": {
