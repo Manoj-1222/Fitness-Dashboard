@@ -45,7 +45,7 @@ npm start     # For Create React App
 ```
 
 ### 4. Open in Browser
-Visit [https://fitness-board.netlify.app/](https://fitness-board.netlify.app/)
+Visit [https://fit-dboard.netlify.app/](https://fit-dboard.netlify.app/)
 
 ## Project Structure
 
