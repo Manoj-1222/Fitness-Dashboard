@@ -49,85 +49,111 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Container maxWidth="xl" sx={{ mt: 2, mb: 2 }}>
-        <Grid container direction="column" spacing={2}>
-          {/* Header */}
-          <Grid item>
-            <Header darkMode={darkMode} onToggleTheme={() => setDarkMode(m => !m)} />
-          </Grid>
+      <Container
+  maxWidth="xl"
+  sx={{
+    mt: { xs: 1, sm: 2 },
+    mb: { xs: 1, sm: 2 },
+    px: { xs: 1, sm: 2 }, // More padding on mobile
+  }}
+>
+  <Grid container direction="column" spacing={2}>
+    {/* Header */}
+    <Grid item>
+      <Header darkMode={darkMode} onToggleTheme={() => setDarkMode(m => !m)} />
+    </Grid>
 
-          {/* Top Section: Stats + Activity Log + Calories Chart */}
-          <Grid item>
-            <Grid container spacing={2} alignItems="flex-start">
-              {/* Stats Cards */}
-              <Grid item xs={12} md={8}>
-                <Grid container spacing={2} alignItems="flex-start">
-                  <Grid item xs={12} sm={6} md={3}>
-                    <StatsCard title="Steps Today" value={dummyData.stats.steps} unit="steps" icon={<DirectionsWalkIcon />} color="#42A5F5" />
-                  </Grid>
-                  <Grid item xs={12} sm={6} md={3}>
-                    <StatsCard title="Calories Burned" value={dummyData.stats.calories} unit="Kcal" icon={<FitnessCenterIcon />} color="#FF7043" />
-                  </Grid>
-                  <Grid item xs={12} sm={6} md={3}>
-                    <StatsCard title="Heart Rate" value={dummyData.stats.heartRate} unit="bpm" icon={<FavoriteIcon />} color="#FFC107" />
-                  </Grid>
-                  <Grid item xs={12} sm={6} md={3}>
-                    <StatsCard title="Active Minutes" value={dummyData.stats.activeMinutes} unit="min" icon={<AccessTimeIcon />} color="#4CAF50" />
-                  </Grid>
-                </Grid>
+    {/* Top Section: Stats + Activity Log */}
+    <Grid item>
+      <Grid
+        container
+        spacing={2}
+        direction="row"
+        wrap="wrap"
+        alignItems="stretch"
+      >
+        {/* Stats Cards */}
+        <Grid item xs={12} md={8}>
+          <Grid container spacing={2}>
+            {[
+              {
+                title: "Steps Today",
+                value: dummyData.stats.steps,
+                unit: "steps",
+                icon: <DirectionsWalkIcon />,
+                color: "#42A5F5",
+              },
+              {
+                title: "Calories Burned",
+                value: dummyData.stats.calories,
+                unit: "Kcal",
+                icon: <FitnessCenterIcon />,
+                color: "#FF7043",
+              },
+              {
+                title: "Heart Rate",
+                value: dummyData.stats.heartRate,
+                unit: "bpm",
+                icon: <FavoriteIcon />,
+                color: "#FFC107",
+              },
+              {
+                title: "Active Minutes",
+                value: dummyData.stats.activeMinutes,
+                unit: "min",
+                icon: <AccessTimeIcon />,
+                color: "#4CAF50",
+              },
+            ].map((card, index) => (
+              <Grid key={index} item xs={12} sm={6} md={3}>
+                <StatsCard {...card} />
               </Grid>
-
-              {/* Activity Log and Calories Burned (Right side stack) */}
-              <Grid item xs={12} md={4}>
-                <Grid container direction="column" spacing={2} alignItems="stretch">
-                  <Grid item>
-                    <ActivityLogTable logs={activityLogs} />
-                  </Grid>
-                  
-                </Grid>
-              </Grid>
-            </Grid>
-          </Grid>
-
-          {/* Bottom Section with paddingBottom fix */}
-          <Grid item>
-            <Grid
-              container
-              spacing={2}
-              sx={{
-                display: 'flex',
-                flexWrap: 'wrap',
-                justifyContent: 'flex-start',
-                paddingBottom: '0px'  //  padding-bottom fix  here
-              }}
-            >
-              {/* Goals */}
-              <Grid item sx={{ width: 'fit-content' }}>
-                <GoalsPanel goals={dummyData.goals} stats={dummyData.stats} />
-              </Grid>
-
-              {/* Pie Chart */}
-              <Grid item sx={{ width: 'fit-content' }}>
-                <WorkoutTypePieChart data={dummyData.workoutTypes} />
-              </Grid>
-
-              {/* Toggle and Activity Chart */}
-              <Grid item sx={{ width: 'fit-content' }}>
-                <Box sx={{ mb: 2 }}>
-                  <ToggleViewButtons view={view} onChange={setView} />
-                </Box>
-                <Box>
-                  <ActivityChart data={dummyData.chartData[view]} view={view} />
-                </Box>
-                
-              </Grid>
-              <Grid item>
-                    <CaloriesBurnedChart data={dummyData.caloriesBurned.weekly} />
-                  </Grid>
-            </Grid>
+            ))}
           </Grid>
         </Grid>
-      </Container>
+
+        {/* Activity Log */}
+        <Grid item xs={12} md={4}>
+          <ActivityLogTable logs={activityLogs} />
+        </Grid>
+      </Grid>
+    </Grid>
+
+    {/* Bottom Grid Section */}
+    <Grid item>
+      <Grid
+        container
+        spacing={2}
+        justifyContent="center"
+        wrap="wrap"
+      >
+        {/* Goals Panel */}
+        <Grid item xs={12} sm={6} md={4} sx={{ width: "100%" }}>
+          <GoalsPanel goals={dummyData.goals} stats={dummyData.stats} />
+        </Grid>
+
+        {/* Pie Chart */}
+        <Grid item xs={12} sm={6} md={4} sx={{ width: "100%" }}>
+          <WorkoutTypePieChart data={dummyData.workoutTypes} />
+        </Grid>
+
+        {/* Toggle View & Activity Chart */}
+        <Grid item xs={12} md={6} sx={{ width: "100%" }}>
+          <Box sx={{ mb: 2 }}>
+            <ToggleViewButtons view={view} onChange={setView} />
+          </Box>
+          <ActivityChart data={dummyData.chartData[view]} view={view} />
+        </Grid>
+
+        {/* Calories Burned Chart */}
+        <Grid item xs={12} md={6} sx={{ width: "100%" }}>
+          <CaloriesBurnedChart data={dummyData.caloriesBurned.weekly} />
+        </Grid>
+      </Grid>
+    </Grid>
+  </Grid>
+</Container>
+
       <Footer />
     </ThemeProvider>
   );
