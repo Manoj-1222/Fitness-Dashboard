@@ -1,4 +1,4 @@
-# Fitness Dashboard
+# Fitness Dashboard for Mobile
 
 A visually stunning, interactive, and responsive Fitness Tracker Dashboard built with React.js, Material UI, and Chart.js. Track your fitness stats, activity logs, goals, and progress with beautiful charts and cards.
 
@@ -18,7 +18,7 @@ A visually stunning, interactive, and responsive Fitness Tracker Dashboard built
 
 ## Tech Stack
 
-- **Framework:** React (Vite or Create React App)
+- **Framework:** React (Vite)
 - **UI Kit:** Material UI (v5+)
 - **Charts:** Chart.js with react-chartjs-2
 - **Animations:** framer-motion
@@ -78,13 +78,11 @@ src/
 
 ## Deployment
 
-- **Netlify/Vercel:** Push to GitHub and connect your repo to Netlify or Vercel for instant deployment.
+- **Netlify:** Push to GitHub and connect your repo to Netlify  for instant deployment.
 - **Static Export:** Use `npm run build` to create a production build.
 
 ## Screenshots
 
-> Add screenshots here to showcase the dashboard UI.
+>  screenshots of dashboard UI.
+![alt text](OP4.jpg)![alt text](OP3.jpg)![alt text](OP2-1.jpg)
 
-## License
-
-MIT License
